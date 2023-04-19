@@ -1,51 +1,38 @@
-import requests from "api/requests";
-import Banner from "component/Banner";
-import Footer from "component/Footer";
-import Nav from "component/Nav";
-import Row from "component/Row";
-import { Outlet, Route, Routes } from "react-router-dom";
-import DetailPage from "routes/DetailPage";
-import MainPage from "routes/MainPage";
-import SearchPage from "routes/SearchPage";
+import RouterApp from "Router";
 import'styles/App.css';
+import { authService } from "fbase";
+import { onAuthStateChanged } from "firebase/auth";
+import { useEffect, useState } from "react";
 
-const Layout = () => {
-  return(
-    <div>
-    <Nav/>
-    <Outlet />
-    <Footer/>
-    </div>
-  )
-
-}
 
 function App() {
+  const [init, setInit] = useState(false);
+  const [isLoggein, setIsLoggedin] = useState(false);
+
+  console.log('authService.currentUser->',authService.currentUser);
+
+  const [userObj, setuserObj] = useState(null);
+
+  useEffect(() => {
+    onAuthStateChanged(authService, (user) => {
+      console.log('user->', user);
+      if(user) {
+        setIsLoggedin(user);
+        setuserObj(user);
+      }else{
+        setIsLoggedin(false);
+      }
+      setInit(true);
+    })
+  },[]);
+  
   return (
    <div className="app">
-     
-   <Routes>
-    <Route path="/" element={<Layout />}>
-      <Route index element={<MainPage/>} />
-      <Route path=":movieId" element={<DetailPage/>} />
-      <Route path="search" element={<SearchPage/>} />
-    </Route>
-   </Routes>
-
-
-
-    {/* <Nav />
-    <Banner />
-    <Row title="NETFLIX ORIGINALS" id="NO" fetchUrl={requests.fetchNetflixOriginals} isLargeRow/>
-    <Row title="Trending Now" id="TN" fetchUrl={requests.fetchTrending}/>
-    <Row title="Top Rated" id="TR" fetchUrl={requests.fetchTopRated} />
-    <Row title="Animation Movie" id="AM" fetchUrl={requests.fetchAnimationMovies} />
-    <Row title="Family Movie" id="FM" fetchUrl={requests.fetchFamilyMovies} />
-    <Row title="Adventure Movie" id="DM" fetchUrl={requests.fetchAdventureMovies} />
-    <Row title="Science Fiction" id="SM" fetchUrl={requests.fetchScienceFictionMovies} />
-    <Row title="Action Movie" id="CM" fetchUrl={requests.fetchAction} />
-    <Footer /> */}
-
+     {init ? (
+       <RouterApp isLoggein={isLoggein} userObj={userObj}/>
+     ) : (
+      "로딩중"
+     )}
    </div>
   );
 }
