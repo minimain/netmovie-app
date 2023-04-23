@@ -39,6 +39,16 @@ function SearchPage() {
     }
   }
 
+  const postermouse = document.querySelectorAll('.movie__poster');
+  const hoverpage = document.querySelector('.hoverpage');
+
+  console.log('postermouse->',postermouse);
+  for(let i=0;i<postermouse.length;i++){
+    postermouse[i].addEventListener("mouseover", e =>{
+      hoverpage.classList.add('on');
+    })
+  }
+
 
   // http://api.themoviedb.org/3/search/movie?&query=
 
@@ -54,6 +64,12 @@ function SearchPage() {
             <div className='movie__column-poster' onClick={() => navigate(`/${movie.id}`)}>
               {/* 보류 */}
               <img src={movieImageUrl} alt={movie.title} className='movie__poster'></img>
+              <div className='hoverpage'>
+              <h2>{movie.title}</h2>
+              <p>별점: {movie.vote_average}</p>
+              <p className='modal__Doverview'>{movie.overview.slice(0,100)}...</p>
+              </div>
+              {/* 하나하나for로 해서 저거 다시 설정 hover */}
               {/* 여기에 제목 글 등 더 넣기 */}
             </div>
           </div>

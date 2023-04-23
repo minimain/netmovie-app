@@ -21,7 +21,7 @@ function DetailPage() {
    setMovie(request.data);
    setDgenres(request.data.genres);
   };
-  // console.log('확인->',Dgenres);
+  console.log('확인->',Dgenres);
 
   //영화 api 가지고 오기
   // https://api.themoviedb.org/3/movie/{movie_id}?api_key=<<api_key>>&language=en-US

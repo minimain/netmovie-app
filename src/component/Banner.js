@@ -7,7 +7,9 @@ import styled from 'styled-components';
 function Banner() {
   const [movie, setMovie] = useState([]);
   const [isClicked, setIsClicked] = useState(false);
-
+  const [onClicked, setonClicked] = useState(false);
+  const [Dgenres,setDgenres] = useState([]);
+  // const [Companies, setCompanies] = useState([]);
 
   useEffect(() => {
     fetchData();
@@ -30,14 +32,18 @@ function Banner() {
   });
   console.log('results->', movieDetail);
   setMovie(movieDetail);
+  setDgenres(movieDetail.genres);
+  // setCompanies(movieDetail.production_companies);
   }
-
+  console.log('setDgenres->',Dgenres);
+  // console.log('set->',Companies);
+  console.log('onClicked->',onClicked)
 
   const truncate = (str, n) => {
  return str?.length > n ? str.substr(0, n - 1) + "..." : str;
   }
 
-if(!isClicked){
+if(!isClicked && !onClicked){
   return (
     <header className='banner' style={{backgroundImage: `url("https://image.tmdb.org/t/p/original/${movie.backdrop_path}")`, backgroundPosition: "top center",backgroundSize: "cover"}}>
 
@@ -51,7 +57,7 @@ if(!isClicked){
           <button className='banner__button play' onClick={() => setIsClicked(true)}>
             play
           </button>
-          <button className='banner__button info'>
+          <button className='banner__button info' onClick={() => setonClicked(true)}>
             More Information
           </button>
         </div>
@@ -65,7 +71,7 @@ if(!isClicked){
 
     </header>
   )
-}else{
+}else if(isClicked){
  return(
   <Container>
     <HomeContainer>
@@ -80,6 +86,48 @@ if(!isClicked){
     </HomeContainer>
   </Container>
  )
+}
+else if(onClicked){
+  return(
+    <Containerdetail>
+    <Poster src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`} alt=''>
+    </Poster>
+    <Movie_title>
+    {movie.title || movie.name || movie.original_name}
+    </Movie_title>
+    <Movie_content>
+    <Movie_vote>
+      별점 : {movie.vote_average}
+    </Movie_vote>
+
+    <Movie_genress>
+      {Dgenres.map((genres, index) => {
+        return(
+          <Movie_genres key={index}>
+            {genres.name}
+          </Movie_genres>
+        )
+      })}
+    </Movie_genress>
+
+    <Movie_view>
+      {movie.overview}
+    </Movie_view>
+    </Movie_content>
+
+
+    {/* <Movie_photos>
+      {Companies.map((compani,index) => {
+        return(
+          <Movie_photo key={index}>
+            <Movie_img src={`https://image.tmdb.org/t/p/original${compani.logo_path}`} alt=''/>
+          </Movie_photo>
+        )
+      })}
+    </Movie_photos> */}
+    
+  </Containerdetail>
+  )
 }
 }
 
@@ -111,5 +159,63 @@ border: none;
   height: 100%;
 }
 `;
+
+// -------------
+
+const Containerdetail = styled.div`
+padding-top:100px;
+display:flex;
+flex-direction: column;
+justify-content: flex-start;
+width: 100%;
+height: 100vh;
+background: #000;
+`;
+
+const Poster = styled.img`
+width: 100%;
+background-size: contain;
+
+`;
+const Movie_title = styled.h2`
+margin:20px 0;
+color:#fff;
+`;
+
+const Movie_content = styled.div`
+margin-left:20px;
+`;
+const Movie_vote = styled.p`
+color:#fff;
+font-size:15px;
+margin-bottom:8px;
+`;
+
+const Movie_view = styled.p`
+color:#fff;
+margin-top:10px;
+`;
+
+const Movie_genress = styled.ul`
+padding:0;
+list-style: none;
+display:flex;
+`;
+
+const Movie_genres = styled.li`
+color:#fff;
+margin-right:10px;
+`;
+
+// const Movie_photos = styled.ul`
+// `;
+
+// const Movie_photo = styled.li`
+// `;
+
+// const Movie_img = styled.img`
+// width:200px;
+// height:200px;
+// `;
 
 export default Banner

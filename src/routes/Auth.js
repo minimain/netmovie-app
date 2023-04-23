@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import { authService } from 'fbase';
 import { GithubAuthProvider, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
+import'styles/auth.scss';
+import { BsGithub } from "react-icons/bs";
+import { FaGoogle } from "react-icons/fa";
 
 function Auth() {
 
@@ -54,8 +57,8 @@ const onSocialClick =  async (e) => {
 }
 
   return (
-    <div>
-      <div>
+    <div className='auth_page'>
+      <div className='auth_title'>
         <p>MINI<span>MOVIE</span></p>
       </div>
 
@@ -74,9 +77,13 @@ const onSocialClick =  async (e) => {
 
       <div className='authBtns'>
         <button onClick={onSocialClick} name='google'
-        className='authBtn'>구글</button>
+        className='authBtn'>
+          <i><FaGoogle/></i>
+          </button>
         <button onClick={onSocialClick} name='github'
-        className='authBtn'>깃허브</button>
+        className='authBtn'>
+          <i><BsGithub/></i>
+          </button>
       </div>
     </div>
   )
