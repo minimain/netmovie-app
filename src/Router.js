@@ -9,10 +9,10 @@ import Mypage from 'routes/Mypage'
 import Profile from 'routes/Profile'
 import SearchPage from 'routes/SearchPage'
 
-const Layout = () => {
+const Layout = ({userObj}) => {
   return(
     <div>
-    <Nav/>
+    <Nav userObj={userObj}/>
     <Outlet />
     <Footer/>
     </div>
@@ -26,7 +26,7 @@ function RouterApp({isLoggein, userObj}) {
     <Routes>
     {isLoggein ? (
       <>
-      <Route path="/" element={<Layout />}>
+      <Route path="/" element={<Layout userObj={userObj}/>}>
       <Route index element={<MainPage/>} />
       <Route path=":movieId" element={<DetailPage/>} />
       <Route path="search" element={<SearchPage/>} />

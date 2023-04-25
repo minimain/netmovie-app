@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import'styles/Nav.css';
-function Nav() {
+function Nav({userObj}) {
 const [show, setShow] = useState(false);
 const [searchValue, setSearchValue] = useState("");
 const navigate = useNavigate();
-
+console.log('uerObj_nav->', userObj);
 
 
 useEffect(() => {
@@ -34,8 +34,11 @@ const onChange = (e) => {
       onClick={() => {window.location.href = "/netmovie-app/"}}/>
       
       <input type='search' placeholder='영화를 검색해주세요' className='nav__input' onChange={onChange} value={searchValue}/>
-      <Link to={'/profile'}>
-      <img src='https://occ-0-4796-988.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABbme8JMz4rEKFJhtzpOKWFJ_6qX-0y5wwWyYvBhWS0VKFLa289dZ5zvRBggmFVWVPL2AAYE8xevD4jjLZjWumNo.png?r=a41' alt='User logged' className='nav__avatar' />
+
+      <Link to={'/profile'} className='nav_profile_img'>
+      {userObj.photoURL && (
+        <img src={userObj.photoURL} alt='User logged' className='nav__avatar' />
+      )}
       </Link>
     </nav>
   )

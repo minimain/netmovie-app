@@ -6,9 +6,12 @@ import styled from 'styled-components';
 
 function Banner() {
   const [movie, setMovie] = useState([]);
+  const [imgmovie, setImgMovie] = useState([]);
+
   const [isClicked, setIsClicked] = useState(false);
   const [onClicked, setonClicked] = useState(false);
   const [Dgenres,setDgenres] = useState([]);
+  const [movieImg, setMovieImg] = useState([]);
   // const [Companies, setCompanies] = useState([]);
 
   useEffect(() => {
@@ -29,10 +32,20 @@ function Banner() {
  //특정 영화의 더 상세한 정보를 가져오기(vidieo 비디오 정보도 포함)
  const {data:movieDetail} = await axios.get(`/movie/${movieId}`,{
     params : {append_to_response: "videos"}
-  });
+  }
+  );
+
+ const {data:movieImmage} = await axios.get(`/movie/${movieId}`,{
+    params : {append_to_response: "images"}
+ });
+
+  console.log('moviewhat->',movieImg);
+  console.log('moviehow->',movieImmage);
   console.log('results->', movieDetail);
   setMovie(movieDetail);
+  setImgMovie(movieImmage);
   setDgenres(movieDetail.genres);
+  setMovieImg(imgmovie.images);
   // setCompanies(movieDetail.production_companies);
   }
   console.log('setDgenres->',Dgenres);
@@ -100,12 +113,25 @@ else if(onClicked){
         </Movieposter>
 
         <Movieinfos>
+          {/* <Movieiiii>
+            {movieImg.map((imgs, index)=> {
+              return(
+                <Movieli key={index}>
+                  <Movieim src={imgs.backdrops} alt=''>
+
+                  </Movieim>
+               
+                </Movieli>
+              )
+            })}
+          </Movieiiii> */}
           <Movietitle>
           {movie.title || movie.name || movie.original_name}
           </Movietitle>
     
           <Moviecontent>
           <Movievote>
+            {/* {imgmovie.images} */}
             별점 : {movie.vote_average}
           </Movievote>
       
@@ -146,7 +172,12 @@ else if(onClicked){
   )
 }
 }
-
+const Movieim = styled.img`
+`;
+const Movieiiii = styled.ul`
+`;
+const Movieli = styled.li`
+`;
 const Container = styled.div`
 display:flex;
 flex-direction: column;
