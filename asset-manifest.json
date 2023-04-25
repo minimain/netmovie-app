@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/netmovie-app/static/css/main.0b25612a.css",
-    "main.js": "/netmovie-app/static/js/main.c9298dbe.js",
+    "main.css": "/netmovie-app/static/css/main.928bcaf7.css",
+    "main.js": "/netmovie-app/static/js/main.8243680b.js",
     "static/media/profileimgh.jfif": "/netmovie-app/static/media/profileimgh.fd9d5a1b3b5c1235601a.jfif",
     "index.html": "/netmovie-app/index.html",
-    "main.0b25612a.css.map": "/netmovie-app/static/css/main.0b25612a.css.map",
-    "main.c9298dbe.js.map": "/netmovie-app/static/js/main.c9298dbe.js.map"
+    "main.928bcaf7.css.map": "/netmovie-app/static/css/main.928bcaf7.css.map",
+    "main.8243680b.js.map": "/netmovie-app/static/js/main.8243680b.js.map"
   },
   "entrypoints": [
-    "static/css/main.0b25612a.css",
-    "static/js/main.c9298dbe.js"
+    "static/css/main.928bcaf7.css",
+    "static/js/main.8243680b.js"
   ]
 }
