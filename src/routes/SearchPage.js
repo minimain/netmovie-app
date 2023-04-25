@@ -39,16 +39,16 @@ function SearchPage() {
     }
   }
 
-  const postermouse = document.querySelectorAll('.movie__poster');
-  const hoverpage = document.querySelector('.hoverpage');
+  const postermouse = document.querySelectorAll('.movie__column-poster');
 
-  console.log('postermouse->',postermouse);
-  for(let i=0;i<postermouse.length;i++){
-    postermouse[i].addEventListener("mouseover", e =>{
-      hoverpage.classList.add('on');
+  postermouse.forEach((li) => {
+    li.addEventListener('mouseover', e => {
+      e.currentTarget.classList.add('on');
     })
-  }
-
+    li.addEventListener('mouseout', e => {
+      e.currentTarget.classList.remove('on');
+    })
+  });
 
   // http://api.themoviedb.org/3/search/movie?&query=
 
@@ -63,11 +63,14 @@ function SearchPage() {
           <div className='movie'>  {/* 여기에 키값 지정하래... */}
             <div className='movie__column-poster' onClick={() => navigate(`/${movie.id}`)}>
               {/* 보류 */}
-              <img src={movieImageUrl} alt={movie.title} className='movie__poster'></img>
+              
+              <img src={movieImageUrl} alt={movie.title} className='movie__poster'>
+              </img>
+
               <div className='hoverpage'>
               <h2>{movie.title}</h2>
-              <p>별점: {movie.vote_average}</p>
-              <p className='modal__Doverview'>{movie.overview.slice(0,100)}...</p>
+              {/* <p>별점: {movie.vote_average}</p> */}
+              <p className='modal__Doverview'>{movie.overview.slice(0,70)}...</p>
               </div>
               {/* 하나하나for로 해서 저거 다시 설정 hover */}
               {/* 여기에 제목 글 등 더 넣기 */}

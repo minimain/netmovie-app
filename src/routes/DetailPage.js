@@ -1,6 +1,7 @@
 import axios from '../api/axios';
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
+import styled from 'styled-components';
 
 function DetailPage() {
   const [movie, setMovie] = useState([]);
@@ -39,28 +40,132 @@ function DetailPage() {
 
   if(!movie) return <div>...loading</div>;
   return (
-    <section style={{color:"#fff"}}>
-      <img className='modal__poster-img'
-       src={`http://image.tmdb.org/t/p/original/${movie.backdrop_path}`} alt={movie.title || movie.name || movie.original_title} />
-      <p className='modal__Dtitle'>{movie.title || movie.name || movie.original_title}
-      {/* <span className='modal_length'> {movie.original_language} </span> */}
-      </p>
-      <p>별점: {movie.vote_average}</p>
-      <p className='modal__Doverview'>{movie.overview}</p>
-      <ul className='modale_Dscacth'>
-        {Dgenres.map((genres, index)=> {
-          return(
-            <li className='cacth' key={index}>
-              {genres.name}
-            </li>
-          )
-        })}
-      </ul>
-      
+    <Containerdetail>
 
+      <Backsrc src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`} alt=''>
+      </Backsrc>
+
+      <Movieadd>
+        
+        <Movieposter src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} alt=''>
+        </Movieposter>
+
+        <Movieinfos>
+          <Movietitle>
+          {movie.title || movie.name || movie.original_name}
+          </Movietitle>
+    
+          <Moviecontent>
+          <Movievote>
+            별점 : {movie.vote_average}
+          </Movievote>
       
-    </section>
+          <Moviegenress>
+            장르 :  
+             {Dgenres.map((genres, index) => {
+              return(
+                <Moviegenres key={index}>
+                  {genres.name}
+                </Moviegenres>
+              )
+            })}
+          </Moviegenress>
+      
+          <Movieview>
+            {movie.overview || "상세정보가 제공되고 있지않습니다."}
+          </Movieview>
+
+          </Moviecontent>
+        </Movieinfos>
+        
+  
+      </Movieadd>
+   
+
+
+    {/* <Movie_photos>
+      {Companies.map((compani,index) => {
+        return(
+          <Movie_photo key={index}>
+            <Movie_img src={`https://image.tmdb.org/t/p/original${compani.logo_path}`} alt=''/>
+          </Movie_photo>
+        )
+      })}
+    </Movie_photos> */}
+    
+  </Containerdetail>
   )
 }
+
+const Containerdetail = styled.div`
+// padding-top:100px;
+display:flex;
+flex-direction: column;
+justify-content: flex-start;
+width: 100%;
+background: #000;
+height: 100vh;
+position: relative;
+`;
+
+const Backsrc = styled.img`
+width: 100%;
+object-fit: cover;
+margin: 0 auto;
+height:100vh;
+opacity: 0.3;
+`;
+
+const Movieadd = styled.div`
+display:flex;
+position: absolute;
+top: 180px;
+width: 85%;
+left:50%;
+transform:translateX(-50%);
+`;
+
+const Movieposter = styled.img`
+width: 400px;
+object-fit: contain;
+margin-right: 80px;
+// position: absolute;
+// top:250px;
+// left:150px;
+`;
+
+const Movieinfos = styled.div`
+`;
+
+const Movietitle = styled.h2`
+margin:20px 0;
+color:#fff;
+`;
+
+const Moviecontent = styled.div`
+margin-left:20px;
+`;
+const Movievote = styled.p`
+color:#fff;
+font-size:15px;
+margin-bottom:8px;
+`;
+
+const Movieview = styled.p`
+color:#fff;
+margin-top:10px;
+`;
+
+const Moviegenress = styled.ul`
+padding:0;
+list-style: none;
+display:flex;
+color:#fff;
+`;
+
+const Moviegenres = styled.li`
+color:#fff;
+margin-right:10px;
+`;
 
 export default DetailPage

@@ -90,30 +90,46 @@ if(!isClicked && !onClicked){
 else if(onClicked){
   return(
     <Containerdetail>
-    <Poster src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`} alt=''>
-    </Poster>
-    <Movie_title>
-    {movie.title || movie.name || movie.original_name}
-    </Movie_title>
-    <Movie_content>
-    <Movie_vote>
-      별점 : {movie.vote_average}
-    </Movie_vote>
 
-    <Movie_genress>
-      {Dgenres.map((genres, index) => {
-        return(
-          <Movie_genres key={index}>
-            {genres.name}
-          </Movie_genres>
-        )
-      })}
-    </Movie_genress>
+      <Backsrc src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`} alt=''>
+      </Backsrc>
 
-    <Movie_view>
-      {movie.overview}
-    </Movie_view>
-    </Movie_content>
+      <Movieadd>
+        
+        <Movieposter src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} alt=''>
+        </Movieposter>
+
+        <Movieinfos>
+          <Movietitle>
+          {movie.title || movie.name || movie.original_name}
+          </Movietitle>
+    
+          <Moviecontent>
+          <Movievote>
+            별점 : {movie.vote_average}
+          </Movievote>
+      
+          <Moviegenress>
+            장르 :  
+             {Dgenres.map((genres, index) => {
+              return(
+                <Moviegenres key={index}>
+                  {genres.name}
+                </Moviegenres>
+              )
+            })}
+          </Moviegenress>
+      
+          <Movieview>
+            {movie.overview || "상세정보가 제공되고 있지않습니다."}
+          </Movieview>
+
+          </Moviecontent>
+        </Movieinfos>
+        
+  
+      </Movieadd>
+   
 
 
     {/* <Movie_photos>
@@ -137,6 +153,7 @@ flex-direction: column;
 justify-content:center;
 width: 100%;
 height: 100vh;
+overflow: hidden;
 `;
 
 const HomeContainer = styled.div`
@@ -163,46 +180,72 @@ border: none;
 // -------------
 
 const Containerdetail = styled.div`
-padding-top:100px;
+// padding-top:100px;
 display:flex;
 flex-direction: column;
 justify-content: flex-start;
 width: 100%;
-height: 100vh;
 background: #000;
+height: 100vh;
+position: relative;
 `;
 
-const Poster = styled.img`
+const Backsrc = styled.img`
 width: 100%;
-background-size: contain;
-
+object-fit: cover;
+margin: 0 auto;
+height:100vh;
+opacity: 0.3;
 `;
-const Movie_title = styled.h2`
+
+const Movieadd = styled.div`
+display:flex;
+position: absolute;
+top: 180px;
+width: 85%;
+left:50%;
+transform:translateX(-50%);
+`;
+
+const Movieposter = styled.img`
+width: 400px;
+object-fit: contain;
+margin-right: 80px;
+// position: absolute;
+// top:250px;
+// left:150px;
+`;
+
+const Movieinfos = styled.div`
+`;
+
+const Movietitle = styled.h2`
 margin:20px 0;
 color:#fff;
 `;
 
-const Movie_content = styled.div`
+const Moviecontent = styled.div`
 margin-left:20px;
 `;
-const Movie_vote = styled.p`
+const Movievote = styled.p`
 color:#fff;
 font-size:15px;
 margin-bottom:8px;
 `;
 
-const Movie_view = styled.p`
+const Movieview = styled.p`
 color:#fff;
 margin-top:10px;
 `;
 
-const Movie_genress = styled.ul`
+const Moviegenress = styled.ul`
 padding:0;
 list-style: none;
 display:flex;
+color:#fff;
 `;
 
-const Movie_genres = styled.li`
+const Moviegenres = styled.li`
 color:#fff;
 margin-right:10px;
 `;
