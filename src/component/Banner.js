@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'api/axios';
 import requests from 'api/requests';
-import'styles/Banner.css';
+import'styles/Banner.scss';
 import styled from 'styled-components';
 
 function Banner() {
   const [movie, setMovie] = useState([]);
+  const [imgmovie, setImgMovie] = useState([]);
+
   const [isClicked, setIsClicked] = useState(false);
   const [onClicked, setonClicked] = useState(false);
   const [Dgenres,setDgenres] = useState([]);
+  const [movieImg, setMovieImg] = useState([]);
   // const [Companies, setCompanies] = useState([]);
 
   useEffect(() => {
@@ -29,10 +32,22 @@ function Banner() {
  //특정 영화의 더 상세한 정보를 가져오기(vidieo 비디오 정보도 포함)
  const {data:movieDetail} = await axios.get(`/movie/${movieId}`,{
     params : {append_to_response: "videos"}
-  });
+  }
+  );
+
+// https://api.themoviedb.org/3/movie/{movie_id}/images?api_key=<<api_key>>&language=en-US
+
+//  const {data:movieImmage} = await axios.get(`/movie/${movieId}/`,{
+//   params : {include_image_language: "images"}
+//  });
+
+  console.log('moviewhat->',movieImg);
+  // console.log('moviehow->',movieImmage);
   console.log('results->', movieDetail);
   setMovie(movieDetail);
+  // setImgMovie(movieImmage);
   setDgenres(movieDetail.genres);
+  setMovieImg(imgmovie.images);
   // setCompanies(movieDetail.production_companies);
   }
   console.log('setDgenres->',Dgenres);
@@ -100,12 +115,25 @@ else if(onClicked){
         </Movieposter>
 
         <Movieinfos>
+          {/* <Movieiiii>
+            {movieImg.map((imgs, index)=> {
+              return(
+                <Movieli key={index}>
+                  <Movieim src={imgs.backdrops} alt=''>
+
+                  </Movieim>
+               
+                </Movieli>
+              )
+            })}
+          </Movieiiii> */}
           <Movietitle>
           {movie.title || movie.name || movie.original_name}
           </Movietitle>
     
           <Moviecontent>
           <Movievote>
+            {/* {imgmovie.images} */}
             별점 : {movie.vote_average}
           </Movievote>
       
@@ -123,7 +151,24 @@ else if(onClicked){
           <Movieview>
             {movie.overview || "상세정보가 제공되고 있지않습니다."}
           </Movieview>
+          {/* <Ulm>
+            <Lim>
+              <Ifrom>
 
+              </Ifrom>
+            </Lim>
+          </Ulm> */}
+          {/* <ul>
+            <li>
+            <MovieIframe
+              src={`https://www.youtube.com/embed/${movie.videos.results[0]?.key}
+              ?controls=0&autoplay=1&loop=1&mute=1&playlist=${movie.videos.results[0]?.key}`}></MovieIframe>
+            </li>
+          </ul> */}
+          
+            {/* src={`https://www.youtube.com/embed/${movie.videos.results[0]?.key}
+      ?controls=0&autoplay=1&loop=1&mute=1&playlist=${movie.videos.results[0]?.key}`} */}
+         
           </Moviecontent>
         </Movieinfos>
         
@@ -146,7 +191,12 @@ else if(onClicked){
   )
 }
 }
-
+// const Movieim = styled.img`
+// `;
+// const Movieiiii = styled.ul`
+// `;
+// const Movieli = styled.li`
+// `;
 const Container = styled.div`
 display:flex;
 flex-direction: column;
@@ -249,6 +299,9 @@ const Moviegenres = styled.li`
 color:#fff;
 margin-right:10px;
 `;
+
+// const MovieIframe = styled.ifram`
+// `;
 
 // const Movie_photos = styled.ul`
 // `;

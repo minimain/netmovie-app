@@ -1,4 +1,5 @@
 import Footer from 'component/Footer'
+import Loading from 'component/Loading'
 import Nav from 'component/Nav'
 import React from 'react'
 import { Outlet, Route, Routes } from 'react-router-dom'
@@ -9,10 +10,10 @@ import Mypage from 'routes/Mypage'
 import Profile from 'routes/Profile'
 import SearchPage from 'routes/SearchPage'
 
-const Layout = () => {
+const Layout = ({userObj}) => {
   return(
     <div>
-    <Nav/>
+    <Nav userObj={userObj}/>
     <Outlet />
     <Footer/>
     </div>
@@ -26,16 +27,18 @@ function RouterApp({isLoggein, userObj}) {
     <Routes>
     {isLoggein ? (
       <>
-      <Route path="/" element={<Layout />}>
+      <Route path="/" element={<Layout userObj={userObj}/>}>
       <Route index element={<MainPage/>} />
       <Route path=":movieId" element={<DetailPage/>} />
       <Route path="search" element={<SearchPage/>} />
     </Route>
+       
        <Route path='/profile' element={<Profile userObj={userObj}/>}/>
        <Route path='/mypage' element={<Mypage userObj={userObj}/>}/>
       </>
     ): (
-      <Route path='/' element={<Auth/>}/>
+    <Route path='/' element={<Auth/>}/>
+      
     )}
    </Routes>
     </div>

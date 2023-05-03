@@ -1,7 +1,7 @@
 import axios from '../api/axios';
 import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import'../styles/Searchpage.css';
+import'../styles/Searchpage.scss';
 import useDebounce from 'hooks/useDebounce';
 
 function SearchPage() {

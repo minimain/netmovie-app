@@ -1,6 +1,6 @@
 import axios from 'api/axios';
 import React, { useEffect, useState } from 'react';
-import'styles/Row.css';
+import'styles/Row.scss';
 import MovieModal from './MovieModal';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -11,7 +11,7 @@ import 'swiper/css/scrollbar';
 
 function Row({isLargeRow, title, id, fetchUrl}) {
 
-  const [movies, setMovies] = useState([]);
+const [movies, setMovies] = useState([]);
 const [modalOpen, setModalOpen] = useState(false);
 const [movieSelected, setMovieSelected] = useState({});
 
@@ -37,7 +37,7 @@ const [movieSelected, setMovieSelected] = useState({});
   }
 
   return (
-    <section className='row' key={id}> 
+    <section className='row' key={id}>
     <h2>{title}</h2>
     <Swiper
      modules={[Navigation, Pagination, Scrollbar, A11y]}

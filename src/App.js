@@ -1,8 +1,9 @@
 import RouterApp from "Router";
-import'styles/App.css';
+import'styles/App.scss';
 import { authService } from "fbase";
 import { onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
+import Loading from "component/Loading";
 
 
 function App() {
@@ -31,7 +32,7 @@ function App() {
      {init ? (
        <RouterApp isLoggein={isLoggein} userObj={userObj}/>
      ) : (
-      "로딩중"
+      <Loading/>
      )}
    </div>
   );

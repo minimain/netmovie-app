@@ -1,12 +1,27 @@
-.row{margin-left: 20px;color: #fff;}
-h2{padding-left: 20px;}
+// 보류
+.row{
+  margin-left: 20px;color: #fff;
+  h2{
+    padding-left: 20px;}
+
+  .row__posters{display: flex;padding: 20px 0 20px 20px;
+   overflow-y: hidden;overflow-x: scroll;scroll-behavior: smooth;
+  &::-webkit-scrollbar{display:none}
+
+    .row__poster{width: 100%;max-height: 144px;object-fit: contain;margin-right: 10px;border-radius: 4px;transition: transform 450ms linear 0s;
+    &:hover{transform: scale(1.08);}
+    .row__posterLarge{max-height: 320px;
+    &:hover{transform: scale(1.1);opacity: 1;}}
+    }
+  }
+}
+
 .slider{position: relative;}
 .row__posters{display: flex;padding: 20px 0 20px 20px;
   overflow-y: hidden;overflow-x: scroll;scroll-behavior: smooth;}
 .row__posters::-webkit-scrollbar{display:none}
 /* none을 해서 가로 스크롤바가 안보이는것 */
-.row__poster{width: 100%;max-height: 144px;object-fit: contain;margin-right: 10px;
-  border-radius: 4px;transition: transform 450ms linear 0s;}
+.row__poster{width: 100%;max-height: 144px;object-fit: contain;margin-right: 10px;border-radius: 4px;transition: transform 450ms linear 0s;}
   .row__poster:hover{transform: scale(1.08);}
   .row__posterLarge{max-height: 320px;}
   .row__posterLarge:hover{transform: scale(1.1);opacity: 1;}
@@ -28,6 +43,12 @@ z-index: 1000;position: absolute;top: 0;width: 80px;height: 100%;cursor: pointer
 }
 
 @media (max-width: 768px) {
+  .row__poster{max-height: 100px;}
+  .row__posterLarge{max-height: 280px;}
+}
+
+@media (max-width: 500px) {
+  h2{}
   .row__poster{max-height: 100px;}
   .row__posterLarge{max-height: 280px;}
 }

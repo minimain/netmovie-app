@@ -1,17 +1,23 @@
 import useOnClickOutside from 'hooks/useOnClickOutside';
-import React, { useRef } from 'react'
-import'styles/MovieModal.css';
+import React, { useEffect, useRef, useState } from 'react'
+import'styles/MovieModal.scss';
 
 function MovieModal({setModalOpen, backdrop_path
 ,overview, release_date,title,name,vote_average,first_air_date}) {
+
+  // const [detailimgs, setDetailimgs] = useState([]);
+
+
+  // https://api.themoviedb.org/3/movie/{movie_id}/images?api_key=<<api_key>>&language=en-US
+  useEffect(() => {
+   
+  },[]);
   
   const ref = useRef();
 
   useOnClickOutside(ref, () => {setModalOpen(false)});
-  
-  
-  
-  
+
+
   
   return (
     <div className='presentation'>
@@ -27,6 +33,7 @@ function MovieModal({setModalOpen, backdrop_path
             <h2 className='modal__title'>{title ? title : name}</h2>
             <p className='modal__details'> 평점: {vote_average}</p>
             <p className='modal__overview'>{overview}</p>
+            
           </div>
         </div>
       </div>
