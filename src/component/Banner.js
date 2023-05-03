@@ -35,6 +35,7 @@ function Banner() {
   }
   );
 
+// <<<<<<< HEAD
 // https://api.themoviedb.org/3/movie/{movie_id}/images?api_key=<<api_key>>&language=en-US
 
 //  const {data:movieImmage} = await axios.get(`/movie/${movieId}/`,{
@@ -46,6 +47,17 @@ function Banner() {
   console.log('results->', movieDetail);
   setMovie(movieDetail);
   // setImgMovie(movieImmage);
+// =======
+ const {data:movieImmage} = await axios.get(`/movie/${movieId}`,{
+    params : {append_to_response: "images"}
+ });
+
+  console.log('moviewhat->',movieImg);
+  console.log('moviehow->',movieImmage);
+  console.log('results->', movieDetail);
+  setMovie(movieDetail);
+  setImgMovie(movieImmage);
+// >>>>>>> a17ed6e1c585577c740b237ee2ca623d85960057
   setDgenres(movieDetail.genres);
   setMovieImg(imgmovie.images);
   // setCompanies(movieDetail.production_companies);
@@ -191,12 +203,21 @@ else if(onClicked){
   )
 }
 }
+// <<<<<<< HEAD
 // const Movieim = styled.img`
 // `;
 // const Movieiiii = styled.ul`
 // `;
 // const Movieli = styled.li`
 // `;
+// =======
+// const Movieim = styled.img`
+// `;
+// const Movieiiii = styled.ul`
+// `;
+// const Movieli = styled.li`
+// `;
+// >>>>>>> a17ed6e1c585577c740b237ee2ca623d85960057
 const Container = styled.div`
 display:flex;
 flex-direction: column;

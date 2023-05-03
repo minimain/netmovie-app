@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+<<<<<<< HEAD
 import'styles/Nav.scss';
+=======
+import'styles/Nav.css';
+>>>>>>> a17ed6e1c585577c740b237ee2ca623d85960057
 function Nav({userObj}) {
 const [show, setShow] = useState(false);
 const [searchValue, setSearchValue] = useState("");
