@@ -12,3 +12,7 @@ background-color: #2b2b2b9f;}
 .hoverpage>h2{margin-bottom: 10px;}
 .hoverpage>p{width: 80%;margin: 0 auto;}
   /* .hoverpage.on{opacity: 1;} */
+
+  @media (max-width: 750px) {
+    .movie__column-poster.on{transform: scale(1.1);}
+   }

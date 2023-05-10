@@ -276,6 +276,10 @@ top: 180px;
 width: 85%;
 left:50%;
 transform:translateX(-50%);
+@media (max-width: 750px) {
+  flex-direction: column;
+  top:100px;
+ }
 `;
 
 const Movieposter = styled.img`
@@ -285,6 +289,10 @@ margin-right: 80px;
 // position: absolute;
 // top:250px;
 // left:150px;
+@media (max-width: 750px) {
+   width:250px;
+   margin: 0 auto;
+ }
 `;
 
 const Movieinfos = styled.div`
